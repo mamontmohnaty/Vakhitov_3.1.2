@@ -29,7 +29,7 @@
                 </th:block>
             </td>
             <td>
-                <form th:method="GET" th:action="@{/edit/{id}(id=${user.id})}">
+                <form th:method="GET" th:action="@{edit/{id}(id=${user.id})}">
                     <input type="submit" value="Edit"/>
                 </form>
                 <form th:method="DELETE" th:action="@{delete/{id}(id=${user.id})}">
