@@ -62,7 +62,6 @@ public class AdminController {
         return "redirect:/admin/";
     }
 
-
     @GetMapping("/edit/{id}")
     public String updateUserForm(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.findById(id));
@@ -80,12 +79,6 @@ public class AdminController {
         userService.saveUser(user);
         return "redirect:/admin/";
     }
-
-//    @GetMapping("delete/{id}")
-//    public String deleteUser(@PathVariable("id") Long id) {
-//        userService.deleteById(id);
-//        return "redirect:/";
-//    }
 
     @DeleteMapping("delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
