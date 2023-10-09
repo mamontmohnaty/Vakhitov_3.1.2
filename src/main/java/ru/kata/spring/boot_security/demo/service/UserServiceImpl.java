@@ -24,20 +24,20 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
+    @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
-
+    @Override
     public User findById(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id);
     }
-
+    @Override
     public User saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        return userRepository.saveUser(user);
     }
-
+    @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }

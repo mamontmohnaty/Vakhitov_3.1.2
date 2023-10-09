@@ -1,14 +1,34 @@
 package ru.kata.spring.boot_security.demo.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.Role;
 
-@Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
-    @Query("SELECT r FROM Role r WHERE r.name = :name")
-    Role getRoleByName(@Param("name") String name);
+@Repository
+public class RoleRepository implements RoleDao {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+
+    @Override
+    public List<Role> findAll() {
+        return entityManager.createQuery("SELECT u FROM User u", Role.class)
+                .getResultList();
+    }
+    @Override
+    @SuppressWarnings("unchecked")
+    public Role getRoleByName(String name) {
+
+        Query query = entityManager.createQuery
+        ("SELECT r FROM Role r WHERE r.name = :name");
+        query.setParameter("name", name);
+
+        return (Role) query.getSingleResult();
+    }
 }
