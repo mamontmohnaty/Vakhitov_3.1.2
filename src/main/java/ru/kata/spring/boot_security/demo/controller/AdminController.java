@@ -33,7 +33,7 @@ public class AdminController {
         Set<Role> roles = new HashSet<>();
         roles.add(new Role("ROLE_USER"));
         roles.add(new Role("ROLE_ADMIN"));
-        User admin = new User("admin", "admin", (byte) 20, "admin@mail.com", "1");
+        User admin = new User("admin", "admin", (byte) 20, "admin@mail.com", "admin");
         admin.setRoles(roles);
         userService.saveUser(admin);
     }
