@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import lombok.Data;
+import lombok.*;
+
 import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +12,11 @@ import javax.validation.constraints.*;
 import java.util.Collection;
 import java.util.Set;
 
-@Data
+
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(exclude = "users")
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -48,11 +53,8 @@ public class User implements UserDetails {
             name = "user_roles",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
+
     private Set<Role> roles;
-
-    public User() {
-
-    }
 
     public User(String name, String lastName, Byte age, String email, String password) {
         this.name = name;
@@ -67,6 +69,7 @@ public class User implements UserDetails {
         return getRoles();
     }
 
+    @Override
     public String getPassword() {
         return password;
     }

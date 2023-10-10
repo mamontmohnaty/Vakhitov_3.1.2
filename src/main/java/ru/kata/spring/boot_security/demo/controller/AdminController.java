@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
@@ -32,7 +33,7 @@ public class AdminController {
         Set<Role> roles = new HashSet<>();
         roles.add(new Role("ROLE_USER"));
         roles.add(new Role("ROLE_ADMIN"));
-        User admin = new User("admin", "admin", (byte) 20, "admin@mail.com", "admin");
+        User admin = new User("admin", "admin", (byte) 20, "admin@mail.com", "1");
         admin.setRoles(roles);
         userService.saveUser(admin);
     }
@@ -76,7 +77,7 @@ public class AdminController {
             return "/edit";
         }
         user.setRoles(roleService.getSetRoles(roles));
-        userService.saveUser(user);
+        userService.updateUser(user);
         return "redirect:/admin/";
     }
 

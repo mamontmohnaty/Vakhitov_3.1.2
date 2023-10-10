@@ -1,12 +1,16 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import lombok.Data;
+import lombok.*;
+
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(exclude = "users")
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
@@ -19,9 +23,6 @@ public class Role implements GrantedAuthority {
     @Column(name = "name")
     private String name;
 
-    public Role() {
-    }
-
     public Role(String name) {
         this.name = name;
     }
@@ -33,4 +34,5 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return getName();
     }
+
 }
